@@ -11,12 +11,14 @@
 ## Commands
 
 ```bash
-npm run dev          # Dev server at localhost:4321
-npm run build        # Build static site to ./dist
-npm run preview      # Preview built site
-npm run generate     # Generate articles from data/input/articles.json
-npm run generate:build  # Generate + build in one step
+npm run dev              # Dev server at localhost:4321
+npm run build            # Build static site to ./dist
+npm run preview          # Preview built site
+npm run generate         # Generate articles from data/input/articles.json
+npm run generate:build   # Generate + build in one step
+npm run generate:preview # Generate + build + preview in one step
 ```
+
 
 ## Architecture
 

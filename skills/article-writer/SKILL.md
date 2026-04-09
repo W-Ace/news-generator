@@ -79,7 +79,7 @@ heroImageCredit: "Photo: 來源"
   }
 ]
 ```
-然後執行 `npm run generate:build`。
+然後執行完整的 generate → build → preview 流程（見下方「產生後流程」）。
 
 ### 圖片來源
 
@@ -98,6 +98,18 @@ heroImageCredit: "Photo: 來源"
 `https://commons.wikimedia.org/w/api.php?action=query&titles=File:FILENAME&prop=imageinfo&iiprop=url&iiurlwidth=1200&format=json`
 
 **必須**在 `heroImageCredit` 填寫 `"Photo: Wikimedia Commons / CC BY-SA 4.0"`
+
+## 產生後流程
+
+文章產生完畢後，**必須**自動執行以下步驟：
+
+1. **砍掉舊 process**：`lsof -ti:4321 | xargs kill 2>/dev/null`（避免 port 衝突）
+2. **Build**：`npm run build`
+3. **Preview**：`npm run preview`（用 `run_in_background` 在背景啟動）
+
+或直接跑一條龍指令：`npm run generate:preview`
+
+> **注意**：此環境需要 Node 22+，執行前確認 `nvm use 22`。若遇到 native binding 錯誤，刪除 `node_modules` 和 `package-lock.json` 後重新 `npm install`。
 
 ## 參考資料
 
