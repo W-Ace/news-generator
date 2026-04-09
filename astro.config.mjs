@@ -3,8 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://w-ace.github.io',
-  base: '/news-generator',
+  site: process.env.CI ? 'https://w-ace.github.io' : 'http://localhost:4321',
+  base: process.env.CI ? '/news-generator' : '/',
   output: 'static',
   integrations: [sitemap()],
   vite: {
