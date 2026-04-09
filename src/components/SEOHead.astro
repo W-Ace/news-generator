@@ -12,7 +12,7 @@ interface Props {
 const {
   title,
   description,
-  ogImage = '/images/default-og.svg',
+  ogImage = `${import.meta.env.BASE_URL}images/default-og.svg`,
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
   publishDate,
   author,

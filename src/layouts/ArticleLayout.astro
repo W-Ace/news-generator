@@ -23,12 +23,15 @@ const {
   heroImageAlt,
   heroImageCredit,
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ogImage = heroImage ? `${base}${heroImage}` : undefined;
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  ogImage={heroImage}
+  ogImage={ogImage}
   publishDate={publishDate}
   author={author}
   isArticle={true}

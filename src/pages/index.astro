@@ -5,6 +5,8 @@ import { formatDate } from '../utils/formatDate';
 
 const articles = (await getCollection('articles'))
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="首頁" description="2026年FIFA世界盃最新新聞與深度報導">
@@ -13,10 +15,10 @@ const articles = (await getCollection('articles'))
     <ul class="space-y-8">
       {articles.map((article) => (
         <li>
-          <a href={`/articles/${article.id}`} class="group block">
+          <a href={`${base}/articles/${article.id}`} class="group block">
             {article.data.heroImage && (
               <img
-                src={article.data.heroImage}
+                src={`${base}${article.data.heroImage}`}
                 alt={article.data.heroImageAlt || ''}
                 class="w-full aspect-video object-cover object-top rounded mb-3"
               />
