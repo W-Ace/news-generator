@@ -1,0 +1,29 @@
+---
+interface Props {
+  src?: string;
+  alt?: string;
+  credit?: string;
+}
+
+const { src, alt = '', credit } = Astro.props;
+---
+
+{src ? (
+  <figure class="my-8">
+    <img
+      src={src}
+      alt={alt}
+      class="w-full aspect-video object-cover object-top"
+      loading="eager"
+    />
+    {credit && (
+      <figcaption class="mt-2 text-xs text-ink-500 text-right">
+        {credit}
+      </figcaption>
+    )}
+  </figure>
+) : (
+  <div class="my-8 w-full h-48 bg-gradient-to-r from-accent-dark to-accent flex items-center justify-center">
+    <span class="text-white/80 text-lg font-bold tracking-widest">2026 FIFA WORLD CUP</span>
+  </div>
+)}

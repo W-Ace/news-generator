@@ -1,0 +1,70 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: URL;
+  publishDate?: Date;
+  author?: string;
+  isArticle?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/default-og.svg',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  publishDate,
+  author,
+  isArticle = false,
+} = Astro.props;
+
+const fullTitle = `${title} | 2026世界盃新聞`;
+const ogImageURL = new URL(ogImage, Astro.site).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL.href} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={isArticle ? 'article' : 'website'} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:locale" content="zh_TW" />
+<meta property="og:site_name" content="2026世界盃新聞" />
+{publishDate && <meta property="article:published_time" content={publishDate.toISOString()} />}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+
+<!-- Schema.org JSON-LD -->
+{isArticle && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: title,
+    description,
+    image: ogImageURL,
+    datePublished: publishDate?.toISOString(),
+    author: {
+      '@type': 'Person',
+      name: author || '編輯部',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: '2026世界盃新聞',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalURL.href,
+    },
+  })} />
+)}

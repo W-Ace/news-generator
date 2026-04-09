@@ -1,0 +1,53 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroImage from '../components/HeroImage.astro';
+import ArticleMeta from '../components/ArticleMeta.astro';
+import ArticleBody from '../components/ArticleBody.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  author: string;
+  publishDate: Date;
+  heroImage?: string;
+  heroImageAlt?: string;
+  heroImageCredit?: string;
+}
+
+const {
+  title,
+  description,
+  author,
+  publishDate,
+  heroImage,
+  heroImageAlt,
+  heroImageCredit,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={heroImage}
+  publishDate={publishDate}
+  author={author}
+  isArticle={true}
+>
+  <article class="max-w-5xl mx-auto px-4">
+    <!-- Article Header -->
+    <header class="pt-8 pb-4">
+      <h1 class="text-3xl md:text-4xl font-bold font-sans leading-tight mb-4">
+        {title}
+      </h1>
+      <ArticleMeta author={author} publishDate={publishDate} />
+    </header>
+
+    <!-- Hero Image -->
+    <HeroImage src={heroImage} alt={heroImageAlt} credit={heroImageCredit} />
+
+    <!-- Article Body -->
+    <ArticleBody>
+      <slot />
+    </ArticleBody>
+  </article>
+</BaseLayout>

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Noto Sans TC", sans-serif;
+  --font-serif: "Noto Serif TC", serif;
+
+  /* News color palette */
+  --color-ink-900: #1a1a1a;
+  --color-ink-700: #404040;
+  --color-ink-500: #737373;
+  --color-ink-300: #b3b3b3;
+  --color-ink-100: #e6e6e6;
+
+  --color-paper: #ffffff;
+  --color-paper-warm: #fafaf8;
+  --color-paper-grey: #f5f5f4;
+
+  --color-accent: #c41e3a;
+  --color-accent-dark: #9b1830;
+  --color-accent-light: #e8344f;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    color: var(--color-ink-900);
+    background-color: var(--color-paper-warm);
+  }
+}
+
+/* Chinese typography overrides for prose */
+@layer components {
+  .prose-zh {
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+  }
+
+  .prose-zh h2,
+  .prose-zh h3 {
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+  }
+
+  .prose-zh blockquote {
+    border-left-color: var(--color-accent);
+    font-style: normal;
+  }
+
+  .prose-zh p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+  }
+}
